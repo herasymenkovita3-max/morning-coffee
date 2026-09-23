@@ -39,7 +39,7 @@
   --color-gold-foreground: var(--gold-foreground);
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 18px 40px -24px oklch(0.32 0.06 60 / 0.45);
+  --shadow-soft: 0 18px 40px -24px oklch(0.25 0.02 80 / 0.35);
 }
 
 :root {

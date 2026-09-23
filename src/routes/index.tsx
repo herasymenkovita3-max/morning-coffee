@@ -53,7 +53,7 @@ function Index() {
           <SocialIcons size="sm" />
         </header>
 
-        <section className="blob-card mt-8 border border-border/60 bg-coffee/10 p-8 sm:mt-12 sm:p-12">
+        <section className="blob-card mt-8 border border-border/60 bg-gold p-8 text-gold-foreground sm:mt-12 sm:p-12">
           <p className="text-lg leading-relaxed text-foreground/85 sm:text-2xl">
             NCJC is your daily marketing newspaper, bringing together the latest news, trends,
             campaigns, tools, and ideas worth knowing. We cut through the endless stream of updates
