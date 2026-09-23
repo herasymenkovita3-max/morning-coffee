@@ -10,33 +10,59 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicGeneratePostImageRouteImport } from './routes/api/public/generate-post-image'
+import { Route as ApiPublicPostImageIdRouteImport } from './routes/api/public/post-image.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicGeneratePostImageRoute =
+  ApiPublicGeneratePostImageRouteImport.update({
+    id: '/api/public/generate-post-image',
+    path: '/api/public/generate-post-image',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicPostImageIdRoute = ApiPublicPostImageIdRouteImport.update({
+  id: '/api/public/post-image/$id',
+  path: '/api/public/post-image/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/generate-post-image': typeof ApiPublicGeneratePostImageRoute
+  '/api/public/post-image/$id': typeof ApiPublicPostImageIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/generate-post-image': typeof ApiPublicGeneratePostImageRoute
+  '/api/public/post-image/$id': typeof ApiPublicPostImageIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/generate-post-image': typeof ApiPublicGeneratePostImageRoute
+  '/api/public/post-image/$id': typeof ApiPublicPostImageIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/api/public/generate-post-image' | '/api/public/post-image/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/generate-post-image' | '/api/public/post-image/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/generate-post-image'
+    | '/api/public/post-image/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicGeneratePostImageRoute: typeof ApiPublicGeneratePostImageRoute
+  ApiPublicPostImageIdRoute: typeof ApiPublicPostImageIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +74,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/generate-post-image': {
+      id: '/api/public/generate-post-image'
+      path: '/api/public/generate-post-image'
+      fullPath: '/api/public/generate-post-image'
+      preLoaderRoute: typeof ApiPublicGeneratePostImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/post-image/$id': {
+      id: '/api/public/post-image/$id'
+      path: '/api/public/post-image/$id'
+      fullPath: '/api/public/post-image/$id'
+      preLoaderRoute: typeof ApiPublicPostImageIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicGeneratePostImageRoute: ApiPublicGeneratePostImageRoute,
+  ApiPublicPostImageIdRoute: ApiPublicPostImageIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

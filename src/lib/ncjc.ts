@@ -8,6 +8,7 @@ export type Post = {
   source_url: string;
   likes_count: number;
   created_at: string;
+  image_url: string | null;
 };
 
 export type Quote = {
@@ -23,13 +24,35 @@ export const postsQuery = {
     const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     const { data, error } = await supabase
       .from("posts")
-      .select("id,title,summary,source_name,source_url,likes_count,created_at")
+      .select("id,title,summary,source_name,source_url,likes_count,created_at,image_url")
       .gte("created_at", since)
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data ?? [];
   },
 };
+
+const pending = new Set<string>();
+
+/** Generates the story illustration once per post and caches it in the backend. */
+export async function ensurePostImage(postId: string): Promise<string | null> {
+  if (pending.has(postId)) return null;
+  pending.add(postId);
+  try {
+    const res = await fetch("/api/public/generate-post-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId }),
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { url?: string };
+    return json.url ?? null;
+  } catch {
+    return null;
+  } finally {
+    pending.delete(postId);
+  }
+}
 
 export const quoteQuery = {
   queryKey: ["quote-of-the-day"],
