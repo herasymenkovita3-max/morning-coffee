@@ -14,13 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      posts: {
+        Row: {
+          created_at: string
+          id: string
+          likes_count: number
+          source_name: string
+          source_url: string
+          summary: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          likes_count?: number
+          source_name: string
+          source_url: string
+          summary: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          likes_count?: number
+          source_name?: string
+          source_url?: string
+          summary?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      quotes: {
+        Row: {
+          author: string | null
+          created_at: string
+          id: string
+          shown_on: string
+          text: string
+        }
+        Insert: {
+          author?: string | null
+          created_at?: string
+          id?: string
+          shown_on?: string
+          text: string
+        }
+        Update: {
+          author?: string | null
+          created_at?: string
+          id?: string
+          shown_on?: string
+          text?: string
+        }
+        Relationships: []
+      }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_post_likes: { Args: { post_id: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never
