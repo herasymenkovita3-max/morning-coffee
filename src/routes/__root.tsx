@@ -126,6 +126,14 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    if (!("serviceWorker" in navigator)) return;
+    const host = window.location.hostname;
+    const isPreview = host.includes("id-preview--") || host === "localhost" || host.endsWith(".local");
+    if (isPreview || import.meta.env.DEV) return;
+    navigator.serviceWorker.register("/sw.js").catch(() => undefined);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
