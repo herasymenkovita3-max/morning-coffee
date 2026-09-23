@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Heart, Share2 } from "lucide-react";
+import { PostImage } from "@/components/ncjc/PostImage";
 import { likePost, markLiked, timeAgo, type Post } from "@/lib/ncjc";
 
-const accents = ["bg-card", "bg-gold/25", "bg-forest/10", "bg-coffee/10"];
+const accents = ["bg-card", "bg-gold/25", "bg-forest/15", "bg-coffee/10"];
 
 export function ArticleCard({
   post,
@@ -59,8 +60,10 @@ export function ArticleCard({
     <article
       className={`${accents[index % accents.length]} ${
         index % 2 === 0 ? "blob-card" : "blob-card-alt"
-      } border border-border/60 p-6 sm:p-8`}
+      } flex flex-col overflow-hidden border border-border/60`}
     >
+      <PostImage post={post} className="h-44 w-full sm:h-52" delayMs={(index + 1) * 1200} />
+      <div className="flex flex-1 flex-col p-6 sm:p-8">
       <h3 className="text-2xl leading-tight font-semibold sm:text-3xl">{post.title}</h3>
       <p className="mt-3 text-base leading-relaxed text-foreground/80">{post.summary}</p>
       <p className="mt-4 text-sm text-muted-foreground">
