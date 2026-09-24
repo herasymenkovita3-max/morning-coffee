@@ -100,6 +100,7 @@ export function ArticleCard({
         </button>
         <span className="ml-auto text-sm text-muted-foreground">{timeAgo(post.created_at)}</span>
       </div>
+      </div>
     </article>
   );
 }
