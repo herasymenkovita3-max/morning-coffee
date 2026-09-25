@@ -54,11 +54,13 @@ function Index() {
         </header>
 
         <section className="blob-card mt-8 border border-border/60 bg-gold p-8 text-gold-foreground sm:mt-12 sm:p-12">
-          <p className="text-lg leading-relaxed text-foreground/85 sm:text-2xl">
-            NCJC is your daily marketing newspaper, bringing together the latest news, trends,
-            campaigns, tools, and ideas worth knowing. We cut through the endless stream of updates
-            and give you what actually matters, so you can stay current, spot what's changing, and
-            start your day with a clearer view of marketing.
+          <h2 className="text-4xl leading-[1.02] font-bold sm:text-6xl lg:text-7xl">
+            NCJC is your daily marketing newspaper
+          </h2>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/80 sm:mt-8 sm:text-lg">
+            Bringing together the latest news, trends, campaigns, tools, and ideas worth knowing. We
+            cut through the endless stream of updates and give you what actually matters, so you can
+            stay current, spot what's changing, and start your day with a clearer view of marketing.
           </p>
         </section>
 
