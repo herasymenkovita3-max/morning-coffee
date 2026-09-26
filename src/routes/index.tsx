@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { ArticleCard } from "@/components/ncjc/ArticleCard";
-import { HeroStory } from "@/components/ncjc/HeroStory";
+import { SwipeFeed } from "@/components/ncjc/SwipeFeed";
 import newspaperImg from "@/assets/newspaper.png";
 import { WorldClocks } from "@/components/ncjc/WorldClocks";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
@@ -78,9 +77,14 @@ function Index() {
         </section>
 
         <section className="mt-8 grid gap-6 sm:mt-12 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            {posts.data?.[0] ? (
-              <HeroStory post={posts.data[0]} />
+          <div className="min-w-0 lg:col-span-2">
+            {posts.data && posts.data.length > 0 ? (
+              <SwipeFeed
+                posts={posts.data}
+                liked={liked}
+                onLiked={(id) => setLiked((prev) => [...prev, id])}
+                onToast={setToast}
+              />
             ) : (
               <div className="blob-card border border-border/60 bg-card p-8 text-center">
                 <h3 className="text-2xl font-semibold">
@@ -124,21 +128,9 @@ function Index() {
           </div>
         </section>
 
-        <main className="mt-6 grid gap-6 sm:gap-8 md:grid-cols-2">
-          {posts.isError && (
-            <p className="text-muted-foreground">Stories couldn't load right now.</p>
-          )}
-          {posts.data?.slice(1).map((post, i) => (
-            <ArticleCard
-              key={post.id}
-              post={post}
-              index={i}
-              liked={liked.includes(post.id)}
-              onLiked={(id) => setLiked((prev) => [...prev, id])}
-              onToast={setToast}
-            />
-          ))}
-        </main>
+        {posts.isError && (
+          <p className="mt-6 text-muted-foreground">Stories couldn't load right now.</p>
+        )}
 
         <div className="mt-12 sm:mt-16">
           <Subscribe />
