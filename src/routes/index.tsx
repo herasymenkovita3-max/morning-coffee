@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArticleCard } from "@/components/ncjc/ArticleCard";
 import { HeroStory } from "@/components/ncjc/HeroStory";
 import newspaperImg from "@/assets/newspaper.png";
+import { WorldClocks } from "@/components/ncjc/WorldClocks";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
 import { SocialIcons } from "@/components/ncjc/SocialIcons";
 import { Subscribe } from "@/components/ncjc/Subscribe";
@@ -42,9 +43,9 @@ function Index() {
     <div className="min-h-screen bg-background pb-24">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <header className="pill-nav mt-4 flex items-center gap-3 border border-border/60 px-4 py-4 sm:mt-6 sm:px-8">
-          <div className="hidden h-10 w-10 shrink-0 rounded-full bg-gold sm:block" aria-hidden />
+          <WorldClocks />
           <div className="flex-1 text-center">
-            <h1 className="text-xl leading-none font-semibold sm:text-3xl">
+            <h1 className="silver-shimmer text-xl leading-none font-semibold sm:text-3xl">
               <span className="hidden sm:inline">No Clicks. Just Coffee</span>
               <span className="sm:hidden">NCJC</span>
             </h1>
@@ -52,7 +53,9 @@ function Index() {
               Marketing trends, minus the noise.
             </p>
           </div>
-          <SocialIcons size="sm" />
+          <div className="float-soft">
+            <SocialIcons size="sm" />
+          </div>
         </header>
 
         <section className="blob-card mt-6 flex items-center gap-4 border border-border/60 bg-gold p-5 text-gold-foreground sm:mt-8 sm:gap-6 sm:p-7">
