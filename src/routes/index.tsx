@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { ArticleCard } from "@/components/ncjc/ArticleCard";
 import { HeroStory } from "@/components/ncjc/HeroStory";
+import newspaperImg from "@/assets/newspaper.png";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
 import { SocialIcons } from "@/components/ncjc/SocialIcons";
 import { Subscribe } from "@/components/ncjc/Subscribe";
@@ -54,15 +55,23 @@ function Index() {
           <SocialIcons size="sm" />
         </header>
 
-        <section className="blob-card mt-8 border border-border/60 bg-gold p-8 text-gold-foreground sm:mt-12 sm:p-12">
-          <h2 className="text-4xl leading-[1.02] font-bold sm:text-6xl lg:text-7xl">
-            NCJC is your daily marketing newspaper
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/80 sm:mt-8 sm:text-lg">
-            Bringing together the latest news, trends, campaigns, tools, and ideas worth knowing. We
-            cut through the endless stream of updates and give you what actually matters, so you can
-            stay current, spot what's changing, and start your day with a clearer view of marketing.
-          </p>
+        <section className="blob-card mt-6 flex items-center gap-4 border border-border/60 bg-gold p-5 text-gold-foreground sm:mt-8 sm:gap-6 sm:p-7">
+          <div className="flex-1">
+            <h2 className="text-2xl leading-[1.05] font-bold sm:text-4xl">
+              NCJC is your daily marketing newspaper
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/80">
+              The latest news, trends, campaigns and tools worth knowing — only what actually
+              matters, for a clearer start to your day.
+            </p>
+          </div>
+          <img
+            src={newspaperImg}
+            alt="Newspaper and coffee"
+            width={816}
+            height={816}
+            className="h-24 w-24 shrink-0 sm:h-36 sm:w-36"
+          />
         </section>
 
         <section className="mt-8 grid gap-6 sm:mt-12 lg:grid-cols-3">
