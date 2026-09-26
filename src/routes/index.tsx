@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { ArticleCard } from "@/components/ncjc/ArticleCard";
+import { HeroStory } from "@/components/ncjc/HeroStory";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
 import { SocialIcons } from "@/components/ncjc/SocialIcons";
 import { Subscribe } from "@/components/ncjc/Subscribe";
@@ -64,44 +65,58 @@ function Index() {
           </p>
         </section>
 
-        <section className="my-12 text-center sm:my-16">
-          <div className="mx-auto h-px w-24 bg-border" />
-          <p className="mt-6 text-xs tracking-[0.25em] text-muted-foreground uppercase">
-            Quote of the day
-          </p>
-          {quote.isLoading ? (
-            <p className="mt-4 text-muted-foreground">Brewing…</p>
-          ) : quote.data ? (
-            <>
-              <blockquote className="mx-auto mt-4 max-w-2xl font-display text-2xl leading-snug italic sm:text-4xl">
-                “{quote.data.text}”
-              </blockquote>
-              {quote.data.author && (
-                <p className="mt-4 text-sm text-muted-foreground">— {quote.data.author}</p>
+        <section className="mt-8 grid gap-6 sm:mt-12 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            {posts.data?.[0] ? (
+              <HeroStory post={posts.data[0]} />
+            ) : (
+              <div className="blob-card border border-border/60 bg-card p-8 text-center">
+                <h3 className="text-2xl font-semibold">
+                  {posts.isLoading ? "Loading today's stories…" : "No stories yet today"}
+                </h3>
+                <p className="mt-2 text-muted-foreground">
+                  Fresh picks land every morning. Come back with your coffee.
+                </p>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-4">
+              <div className="flex h-28 w-28 shrink-0 flex-col items-center justify-center rounded-full bg-coffee text-center text-coffee-foreground shadow-soft">
+                <span className="font-display text-4xl leading-none font-bold">
+                  {posts.data?.length ?? 0}
+                </span>
+                <span className="mt-1 text-[10px] tracking-[0.2em] uppercase">stories today</span>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                A quick morning read. Only the last 24 hours.
+              </p>
+            </div>
+            <div className="blob-card-alt flex-1 border border-border/60 bg-forest p-6 text-forest-foreground sm:p-8">
+              <p className="text-xs tracking-[0.25em] uppercase opacity-70">Quote of the day</p>
+              {quote.isLoading ? (
+                <p className="mt-4">Brewing…</p>
+              ) : quote.data ? (
+                <>
+                  <blockquote className="mt-4 font-display text-2xl leading-snug italic">
+                    “{quote.data.text}”
+                  </blockquote>
+                  {quote.data.author && (
+                    <p className="mt-4 text-sm opacity-80">— {quote.data.author}</p>
+                  )}
+                </>
+              ) : (
+                <p className="mt-4 text-lg italic">Today's quote is still brewing.</p>
               )}
-            </>
-          ) : (
-            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground italic">
-              Today's quote is still brewing.
-            </p>
-          )}
-          <div className="mx-auto mt-6 h-px w-24 bg-border" />
+            </div>
+          </div>
         </section>
 
-        <main className="grid gap-6 sm:gap-8">
-          {posts.isLoading && <p className="text-muted-foreground">Loading today's stories…</p>}
+        <main className="mt-6 grid gap-6 sm:gap-8 md:grid-cols-2">
           {posts.isError && (
             <p className="text-muted-foreground">Stories couldn't load right now.</p>
           )}
-          {posts.data?.length === 0 && (
-            <div className="blob-card border border-border/60 bg-card p-8 text-center">
-              <h3 className="text-2xl font-semibold">No stories yet today</h3>
-              <p className="mt-2 text-muted-foreground">
-                Fresh picks land every morning. Come back with your coffee.
-              </p>
-            </div>
-          )}
-          {posts.data?.map((post, i) => (
+          {posts.data?.slice(1).map((post, i) => (
             <ArticleCard
               key={post.id}
               post={post}
