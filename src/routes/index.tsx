@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SwipeFeed } from "@/components/ncjc/SwipeFeed";
 import newspaperImg from "@/assets/newspaper.png";
 import { WorldClocks } from "@/components/ncjc/WorldClocks";
+import { InstallBanner } from "@/components/ncjc/InstallBanner";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
 import { SocialIcons } from "@/components/ncjc/SocialIcons";
 import { Subscribe } from "@/components/ncjc/Subscribe";
@@ -41,6 +42,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+        <InstallBanner />
         <header className="pill-nav mt-4 flex items-center gap-3 border border-border/60 px-4 py-4 sm:mt-6 sm:px-8">
           <WorldClocks />
           <div className="flex-1 text-center">
