@@ -22,6 +22,7 @@ export function InstallBanner() {
   const [visible, setVisible] = useState(false);
   const [ios, setIos] = useState(false);
   const [deferred, setDeferred] = useState<BIPEvent | null>(null);
+  const [manual, setManual] = useState(false);
 
   useEffect(() => {
     if (isStandalone()) return;
@@ -35,6 +36,7 @@ export function InstallBanner() {
       setVisible(true);
       return;
     }
+    if (/android|mobile/i.test(navigator.userAgent)) setVisible(true);
     const onPrompt = (e: Event) => {
       e.preventDefault();
       setDeferred(e as BIPEvent);
@@ -54,7 +56,10 @@ export function InstallBanner() {
   };
 
   const install = async () => {
-    if (!deferred) return;
+    if (!deferred) {
+      setManual(true);
+      return;
+    }
     await deferred.prompt().catch(() => undefined);
     setDeferred(null);
     dismiss();
@@ -75,14 +80,20 @@ export function InstallBanner() {
       ) : (
         <>
           <Download size={15} className="shrink-0 text-coffee" />
-          <p className="flex-1 text-xs sm:text-sm">Install NCJC on your phone</p>
-          <button
+          <p className="flex-1 text-xs sm:text-sm">
+            {manual ? (
+              <>Open the browser menu <span className="font-semibold">⋮</span>, then <span className="font-semibold">Add to Home screen</span></>
+            ) : (
+              "Install NCJC on your phone"
+            )}
+          </p>
+          {!manual && <button
             type="button"
             onClick={install}
             className="rounded-full bg-coffee px-3 py-1 text-xs font-semibold text-coffee-foreground"
           >
             Install
-          </button>
+          </button>}
         </>
       )}
       <button type="button" onClick={dismiss} aria-label="Dismiss" className="shrink-0 opacity-60">
