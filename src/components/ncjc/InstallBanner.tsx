@@ -49,34 +49,36 @@ export function InstallBanner() {
   if (!visible) return null;
 
   return (
-    <div className="mt-4 flex items-center gap-3 rounded-full border border-border/60 bg-card px-4 py-2.5 text-sm shadow-soft">
-      {ios ? (
-        <>
-          <Share size={15} className="shrink-0 text-coffee" />
-          <p className="flex-1 text-xs sm:text-sm">
-            Tap the <span className="font-semibold">Share</span> icon, then{" "}
-            <span className="font-semibold">Add to Home Screen</span>
-          </p>
-        </>
-      ) : (
-        <>
-          <Download size={15} className="shrink-0 text-coffee" />
-          <p className="flex-1 text-xs sm:text-sm">
-            {manual ? (
-              <>Open the browser menu <span className="font-semibold">⋮</span>, then <span className="font-semibold">Add to Home screen</span></>
-            ) : (
-              "Install NCJC on your phone"
-            )}
-          </p>
-          {!manual && <button
-            type="button"
-            onClick={install}
-            className="rounded-full bg-coffee px-3 py-1 text-xs font-semibold text-coffee-foreground"
-          >
-            Install
-          </button>}
-        </>
-      )}
+    <div className="zebra-stripes mt-4 flex items-center rounded-full p-[3px] shadow-soft ring-1 ring-foreground/20">
+      <div className="flex w-full items-center gap-3 rounded-full bg-card px-4 py-2.5 text-sm">
+        {ios ? (
+          <>
+            <Share size={15} className="shrink-0 text-foreground" />
+            <p className="flex-1 text-xs sm:text-sm">
+              Tap the <span className="font-semibold">Share</span> icon, then{" "}
+              <span className="font-semibold">Add to Home Screen</span>
+            </p>
+          </>
+        ) : (
+          <>
+            <Download size={15} className="shrink-0 text-foreground" />
+            <p className="flex-1 text-xs sm:text-sm">
+              {manual ? (
+                <>Open the browser menu <span className="font-semibold">⋮</span>, then <span className="font-semibold">Add to Home screen</span></>
+              ) : (
+                "Install NCJC on your phone"
+              )}
+            </p>
+            {!manual && <button
+              type="button"
+              onClick={install}
+              className="rounded-full bg-foreground px-3 py-1 text-xs font-semibold text-background"
+            >
+              Install
+            </button>}
+          </>
+        )}
+      </div>
     </div>
   );
 }
