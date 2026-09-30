@@ -38,6 +38,7 @@
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-liquid: "Climate Crisis", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --shadow-soft: 0 18px 40px -24px oklch(0.25 0.02 80 / 0.35);
 }
@@ -166,4 +167,26 @@
     transparent 5px,
     transparent 11px
   );
+}
+
+/* Liquid ink headline: glossy black chrome, like the melted type on the moodboard */
+@utility liquid-ink {
+  font-family: var(--font-liquid);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    168deg,
+    oklch(0.05 0 0) 0%,
+    oklch(0.05 0 0) 32%,
+    oklch(0.62 0 0) 44%,
+    oklch(0.99 0 0) 50%,
+    oklch(0.45 0 0) 56%,
+    oklch(0.05 0 0) 68%,
+    oklch(0.05 0 0) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
