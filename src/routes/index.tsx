@@ -46,7 +46,7 @@ function Index() {
         <header className="pill-nav mt-4 flex items-center gap-3 border border-border/60 px-4 py-4 sm:mt-6 sm:px-8">
           <WorldClocks />
           <div className="flex-1 text-center">
-            <h1 className="silver-shimmer text-xl leading-none font-semibold sm:text-3xl">
+            <h1 className="liquid-ink text-lg sm:text-2xl">
               <span className="hidden sm:inline">No Clicks. Just Coffee</span>
               <span className="sm:hidden">NCJC</span>
             </h1>
@@ -66,7 +66,7 @@ function Index() {
               <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted-foreground sm:text-xs">
                 The daily edition
               </p>
-              <h2 className="mt-2 text-2xl leading-[1.02] font-bold tracking-tight uppercase sm:text-4xl">
+              <h2 className="liquid-ink mt-3 text-2xl sm:text-4xl">
                 NCJC is your daily marketing newspaper
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
