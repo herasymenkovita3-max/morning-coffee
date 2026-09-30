@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { SwipeFeed } from "@/components/ncjc/SwipeFeed";
-import newspaperImg from "@/assets/newspaper.png";
+import newspaperImg from "@/assets/newspaper-bw.png";
 import { WorldClocks } from "@/components/ncjc/WorldClocks";
 import { InstallBanner } from "@/components/ncjc/InstallBanner";
 import { MusicPlayer } from "@/components/ncjc/MusicPlayer";
@@ -59,23 +59,29 @@ function Index() {
           </div>
         </header>
 
-        <section className="blob-card mt-6 flex items-center gap-4 border border-border/60 bg-gold p-5 text-gold-foreground sm:mt-8 sm:gap-6 sm:p-7">
-          <div className="flex-1">
-            <h2 className="text-2xl leading-[1.05] font-bold sm:text-4xl">
-              NCJC is your daily marketing newspaper
-            </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/80">
-              The latest news, trends, campaigns and tools worth knowing — only what actually
-              matters, for a clearer start to your day.
-            </p>
+        <section className="blob-card mt-6 overflow-hidden border-2 border-foreground bg-card sm:mt-8">
+          <div className="wavy-stripes h-10 w-full border-b-2 border-foreground sm:h-14" />
+          <div className="flex items-center gap-4 p-5 sm:gap-6 sm:p-7">
+            <div className="flex-1">
+              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted-foreground sm:text-xs">
+                The daily edition
+              </p>
+              <h2 className="mt-2 text-2xl leading-[1.02] font-bold tracking-tight uppercase sm:text-4xl">
+                NCJC is your daily marketing newspaper
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                The latest news, trends, campaigns and tools worth knowing — only what actually
+                matters, for a clearer start to your day.
+              </p>
+            </div>
+            <img
+              src={newspaperImg}
+              alt="Newspaper and coffee"
+              width={1024}
+              height={1024}
+              className="h-28 w-28 shrink-0 sm:h-40 sm:w-40"
+            />
           </div>
-          <img
-            src={newspaperImg}
-            alt="Newspaper and coffee"
-            width={816}
-            height={816}
-            className="h-24 w-24 shrink-0 sm:h-36 sm:w-36"
-          />
         </section>
 
         <section className="mt-8 grid gap-6 sm:mt-12 lg:grid-cols-3">
@@ -99,19 +105,21 @@ function Index() {
             )}
           </div>
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <div className="flex h-28 w-28 shrink-0 flex-col items-center justify-center rounded-full bg-coffee text-center text-coffee-foreground shadow-soft">
-                <span className="font-display text-4xl leading-none font-bold">
-                  {posts.data?.length ?? 0}
-                </span>
-                <span className="mt-1 text-[10px] tracking-[0.2em] uppercase">stories today</span>
+            <div className="flex items-center gap-5">
+              <div className="ink-rings flex h-32 w-32 shrink-0 items-center justify-center rounded-full">
+                <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-foreground text-center text-background shadow-soft">
+                  <span className="font-display text-4xl leading-none font-bold">
+                    {posts.data?.length ?? 0}
+                  </span>
+                  <span className="mt-1 text-[9px] tracking-[0.2em] uppercase">stories today</span>
+                </div>
               </div>
               <p className="text-sm text-muted-foreground">
                 A quick morning read. Only the last 24 hours.
               </p>
             </div>
-            <div className="blob-card-alt flex-1 border border-border/60 bg-forest p-6 text-forest-foreground sm:p-8">
-              <p className="text-xs tracking-[0.25em] uppercase opacity-70">Quote of the day</p>
+            <div className="blob-card-alt flex-1 border-2 border-foreground bg-foreground p-6 text-background sm:p-8">
+              <p className="text-xs tracking-[0.25em] uppercase opacity-60">Quote of the day</p>
               {quote.isLoading ? (
                 <p className="mt-4">Brewing…</p>
               ) : quote.data ? (
@@ -120,7 +128,7 @@ function Index() {
                     “{quote.data.text}”
                   </blockquote>
                   {quote.data.author && (
-                    <p className="mt-4 text-sm opacity-80">— {quote.data.author}</p>
+                    <p className="mt-4 text-sm opacity-70">— {quote.data.author}</p>
                   )}
                 </>
               ) : (

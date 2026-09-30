@@ -149,3 +149,21 @@
     oklch(0.99 0.006 90) 24px
   );
 }
+
+/* Op-art wavy stripes: black ink waves on white, newsprint poster vibe */
+@utility wavy-stripes {
+  background-color: oklch(0.99 0.006 90);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Cg fill='none' stroke='%23141414' stroke-width='5'%3E%3Cpath d='M-12 8 Q0 0 12 8 T36 8 T60 8 T84 8 T108 8'/%3E%3Cpath d='M-12 24 Q0 16 12 24 T36 24 T60 24 T84 24 T108 24'/%3E%3Cpath d='M-12 40 Q0 32 12 40 T36 40 T60 40 T84 40 T108 40'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 48px;
+}
+
+/* Concentric ink rings, like type warped around a tunnel */
+@utility ink-rings {
+  background-image: repeating-radial-gradient(
+    circle at 50% 50%,
+    oklch(0.16 0.01 260) 0px,
+    oklch(0.16 0.01 260) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+}
