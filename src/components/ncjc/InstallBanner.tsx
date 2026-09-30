@@ -25,10 +25,7 @@ export function InstallBanner() {
   useEffect(() => {
     if (isStandalone()) return;
     setVisible(true);
-    if (isIos()) {
-      setIos(true);
-      return;
-    }
+    setIos(isIos());
     const onPrompt = (e: Event) => {
       e.preventDefault();
       setDeferred(e as BIPEvent);
@@ -38,44 +35,50 @@ export function InstallBanner() {
   }, []);
 
   const install = async () => {
-    if (!deferred) {
-      setManual(true);
+    if (deferred) {
+      await deferred.prompt().catch(() => undefined);
+      setDeferred(null);
       return;
     }
-    await deferred.prompt().catch(() => undefined);
-    setDeferred(null);
+    // No native prompt available (iOS or unsupported browser) — show instructions.
+    setManual(true);
   };
 
   if (!visible) return null;
 
+  const Icon = ios ? Share : Download;
+  const iconCls = "shrink-0 text-white drop-shadow-[0_1px_2px_oklch(0.16_0.01_260)]";
+  const textCls =
+    "flex-1 text-xs font-semibold text-white [text-shadow:0_1px_3px_oklch(0.16_0.01_260),0_0_2px_oklch(0.16_0.01_260)] sm:text-sm";
+
   return (
     <div className="zebra-stripes mt-4 flex items-center gap-3 rounded-full px-4 py-2.5 text-sm shadow-soft ring-1 ring-foreground/30">
-      {ios ? (
-        <>
-          <Share size={15} className="shrink-0 text-white drop-shadow-[0_1px_2px_oklch(0.16_0.01_260)]" />
-          <p className="flex-1 text-xs font-semibold text-white [text-shadow:0_1px_3px_oklch(0.16_0.01_260),0_0_2px_oklch(0.16_0.01_260)] sm:text-sm">
-            Tap the <span className="font-bold">Share</span> icon, then{" "}
-            <span className="font-bold">Add to Home Screen</span>
-          </p>
-        </>
-      ) : (
-        <>
-          <Download size={15} className="shrink-0 text-white drop-shadow-[0_1px_2px_oklch(0.16_0.01_260)]" />
-          <p className="flex-1 text-xs font-semibold text-white [text-shadow:0_1px_3px_oklch(0.16_0.01_260),0_0_2px_oklch(0.16_0.01_260)] sm:text-sm">
-            {manual ? (
-              <>Open the browser menu <span className="font-bold">⋮</span>, then <span className="font-bold">Add to Home screen</span></>
-            ) : (
-              "Install NCJC on your phone"
-            )}
-          </p>
-          {!manual && <button
-            type="button"
-            onClick={install}
-            className="rounded-full bg-white px-3 py-1 text-xs font-bold text-foreground shadow-[0_1px_3px_oklch(0.16_0.01_260/0.6)]"
-          >
-            Install
-          </button>}
-        </>
+      <Icon size={15} className={iconCls} />
+      <p className={textCls}>
+        {manual ? (
+          ios ? (
+            <>
+              Tap the <span className="font-bold">Share</span> icon, then{" "}
+              <span className="font-bold">Add to Home Screen</span>
+            </>
+          ) : (
+            <>
+              Open the browser menu <span className="font-bold">⋮</span>, then{" "}
+              <span className="font-bold">Add to Home screen</span>
+            </>
+          )
+        ) : (
+          "Install NCJC on your phone"
+        )}
+      </p>
+      {!manual && (
+        <button
+          type="button"
+          onClick={install}
+          className="shrink-0 cursor-pointer rounded-full bg-white px-3 py-1 text-xs font-bold text-foreground shadow-[0_1px_3px_oklch(0.16_0.01_260/0.6)] active:scale-95"
+        >
+          Install
+        </button>
       )}
     </div>
   );
