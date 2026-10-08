@@ -9,6 +9,8 @@ export type Post = {
   likes_count: number;
   created_at: string;
   image_url: string | null;
+  is_pinned: boolean;
+  editorial_badge: string | null;
 };
 
 export type Quote = {
@@ -19,13 +21,13 @@ export type Quote = {
 };
 
 export const postsQuery = {
-  queryKey: ["posts"],
+  queryKey: ["posts", "with-editorial-picks"],
   queryFn: async (): Promise<Post[]> => {
     const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     const { data, error } = await supabase
       .from("posts")
-      .select("id,title,summary,source_name,source_url,likes_count,created_at,image_url")
-      .gte("created_at", since)
+      .select("id,title,summary,source_name,source_url,likes_count,created_at,image_url,is_pinned,editorial_badge")
+      .or(`is_pinned.eq.true,created_at.gte.${since}`)
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data ?? [];

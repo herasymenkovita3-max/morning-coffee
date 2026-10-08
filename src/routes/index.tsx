@@ -21,6 +21,8 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "No Clicks. Just Coffee" },
       { property: "og:description", content: "Marketing trends, minus the noise." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -111,11 +113,11 @@ function Index() {
                   <span className="font-display text-4xl leading-none font-bold">
                     {posts.data?.length ?? 0}
                   </span>
-                  <span className="mt-1 text-[9px] tracking-[0.2em] uppercase">stories today</span>
+                  <span className="mt-1 text-[9px] tracking-[0.2em] uppercase">stories to read</span>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                A quick morning read. Only the last 24 hours.
+                Fresh news &amp; editor’s picks. A quick read with your coffee.
               </p>
             </div>
             <div className="blob-card-alt flex-1 border-2 border-foreground bg-foreground p-6 text-background sm:p-8">

@@ -15,6 +15,13 @@
       "when": 1790166756192,
       "tag": "0001_add_post_image_url",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791451291193,
+      "tag": "0002_permanent_editorial_posts",
+      "breakpoints": true
     }
   ]
 }

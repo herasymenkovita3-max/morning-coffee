@@ -17,8 +17,10 @@ export type Database = {
       posts: {
         Row: {
           created_at: string
+          editorial_badge: string | null
           id: string
           image_url: string | null
+          is_pinned: boolean
           likes_count: number
           source_name: string
           source_url: string
@@ -27,8 +29,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          editorial_badge?: string | null
           id?: string
           image_url?: string | null
+          is_pinned?: boolean
           likes_count?: number
           source_name: string
           source_url: string
@@ -37,8 +41,10 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          editorial_badge?: string | null
           id?: string
           image_url?: string | null
+          is_pinned?: boolean
           likes_count?: number
           source_name?: string
           source_url?: string

@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Use `posts.is_pinned` for permanent editorial picks alongside the rolling 24-hour feed; keep `editorial_badge` as an editorial label, not a reader vote, so permanence and stickers are managed with each post.
